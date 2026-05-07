@@ -1,0 +1,43 @@
+<header>
+    <div class="img-logo">
+        {% if current_user.role == 'Administrador' %}
+            <a href="{{ url_for('admin.dashboard')}}">
+                <img src="{{ url_for ('static', filename='assets/logo_wl.png')}}" alt="Logomarca">
+            </a>
+        {% endif %}
+        {% if current_user.role == 'Supervisor' %}
+            <a href="{{ url_for('supervisor.dashboard')}}">
+                <img src="{{ url_for ('static', filename='assets/logo_wl.png')}}" alt="Logomarca">
+            </a>
+        {% endif %}
+        {% if current_user.role == 'Segurança' %}
+            <a href="{{ url_for('security.dashboard')}}">
+                <img src="{{ url_for ('static', filename='assets/logo_wl.png')}}" alt="Logomarca">
+            </a>
+        {% endif %}
+    </div>
+    <div class="user-menu">
+        <div class="profile-container">
+            <div class="profile-img">
+                <a id="image-container" href="{{ url_for('view.update_profile') }}">
+                    {% if current_user.photo %}
+                        <!-- Se tiver foto -->
+                        <img src="{{ url_for('static', filename='/' ~ current_user.photo) }}" alt="Foto de perfil">
+                    {% else %}
+                        <!-- Se não tiver foto, mostra iniciais -->
+                        <div class="avatar-fallback">
+                            {{ current_user.username[:2] | upper }}
+                        </div>
+                    {% endif %}
+                </a>
+            </div>
+            <div class="profile-info">
+                <span>{{ current_user.username }}</span>
+                <small>{{ current_user.role }}</small>
+            </div>
+        </div>
+        <a href="{{ url_for('view.logout') }}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Sair
+        </a>
+    </div>
+</header>

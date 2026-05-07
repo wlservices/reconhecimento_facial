@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block nav_aside %}
+    <aside>
+        <div class="nav-box">
+            <ul class="nav-links">
+                <li><a href="#"><i class="fa-regular fa-user"></i> Usuarios</a></li>
+                <li><a href="#"><i class="fa-solid fa-key"></i> Licencas</a></li>
+                <li><a href="#"><i class="fa-solid fa-laptop-file"></i> Logs do Sistema</a></li>
+                <li><a href="#"><i class="fa-solid fa-file-shield"></i> Registros de Deteccao</a></li>
+                <li><a href="#"><i class="fa-solid fa-newspaper"></i> Auditoria</a></li>
+                <li><a href="#"><i class="fa-solid fa-video"></i> Configurar Cameras</a></li>
+            </ul>
+        </div>
+    </aside>
+{% endblock nav_aside %}
+
+{% block section %}
+    <section class="content-area">
+        <h2 style="color: var(--text-main); margin-bottom: 25px;">Bem-vindo, {{current_user.username | capitalize }} - {{current_user.role | capitalize }}</h2>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Vendas Hoje</h3>
+                <div class="value">R$ 1.250,00</div>
+            </div>
+            <div class="card">
+                <h3>Novos Clientes</h3>
+                <div class="value">12</div>
+            </div>
+            <div class="card">
+                <h3>Projetos Ativos</h3>
+                <div class="value">5</div>
+            </div>
+            <div class="card">
+                <h3>Mensagens</h3>
+                <div class="value">24</div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

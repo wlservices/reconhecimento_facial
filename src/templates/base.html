@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Dashboard</title>{% endblock title %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cropper.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css')}}">
+</head>
+<body>
+
+    {% include 'includes/_modal.html' %}
+
+    {% block nav_aside %} {% endblock nav_aside %}
+
+    <main>
+        {% include 'includes/_header.html' %}
+
+        {% block section %}{% endblock section %}
+        
+        {% include 'includes/_footer.html' %}
+    </main>
+    
+    <script src="{{ url_for('static', filename='js/cropper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

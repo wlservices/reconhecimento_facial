@@ -1,0 +1,4 @@
+flask
+flask_login
+flask_migrate
+python-dotenvx

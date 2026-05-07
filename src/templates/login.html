@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style-login.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css')}}">
+        <title>Login</title>
+    </head>
+    <body>
+        {% include 'includes/_modal.html' %}
+        <div class="card-effect">
+            <div class="box">
+                <div class="content">
+                    <div class="title-box">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <h2>LOGIN</h2>
+                    </div>
+                    <form method="POST" action="{{ url_for('view.login') }}">
+                        <label for="username" class="form-group">Usuário:</label>
+                        <input type="text" name="username" class="form-control" id="username" required><br><br>
+
+                        <label for="password" class="form-group">Senha:</label>
+                        <input type="password" name="password" class="form-control" id="password" required><br><br>
+
+                        <button class="btn-save" type="submit">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

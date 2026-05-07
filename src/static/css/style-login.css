@@ -1,0 +1,94 @@
+*{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        body{
+            align-items: center;
+            background-color: #222;
+        }
+
+        .title-box{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        i{
+            color: #f00;
+            font-size: 1.4rem;
+            text-shadow: 
+                0 0 5px #f50;
+
+        }
+
+        .card-effect{
+            position: relative;
+            background: rgba(0, 0, 0, .75);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 3px;
+            box-shadow: 0 0 15px #000;
+        }
+
+        .card-effect::before{
+            content: "";
+            position: absolute;
+            width: 1000px;
+            height: 1000px;
+            background-image: conic-gradient(transparent, transparent, transparent, #00e5ff);
+            animation: rotate 4s linear infinite;
+            border-radius: 20px;
+        }
+
+        .card-effect::after{
+            content: "";
+            position: absolute;
+            width: 1000px;
+            height: 1000px;
+            background-image: conic-gradient(transparent, transparent, transparent, #ff0058);
+            animation: rotate 4s linear infinite;
+            animation-delay: -2s;
+            border-radius: 15px;
+        }
+
+        .box{
+            inset: 5px;
+            background: #444;
+            padding: 20px;
+            border-radius: 15px;
+            z-index: 1;
+        }
+
+        .content{
+            background: #333;
+            border-radius: 5px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            padding: 20px;
+            justify-content: space-evenly;
+            margin: 0 auto;
+            border-bottom: 1px solid #fff;
+            box-shadow: inset 3px 3px 15px #000;
+            height: 400px;
+        }
+
+        @keyframes rotate{
+            0% {transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
+        }

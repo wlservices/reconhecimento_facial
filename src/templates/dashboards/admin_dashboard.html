@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block nav_aside %}
+    <aside>
+        <div class="nav-box">
+            <nav class="nav-links">
+                <button onclick="showTab(0)" class="tab-btn">
+                    <i class="fa-regular fa-user"></i> Usuários
+                </button>
+            
+                <button onclick="showTab(1)" class="tab-btn">
+                    <i class="fa-solid fa-key"></i> Licencas
+                </button>
+            
+                <button onclick="showTab(2)" class="tab-btn">
+                    <i class="fa-solid fa-laptop-file"></i> Logs do Sistema
+                </button>
+            
+                <button onclick="showTab(3)" class="tab-btn">
+                    <i class="fa-solid fa-file-shield"></i> Registros de Detecção
+                </button>
+            
+                <button onclick="showTab(4)" class="tab-btn">
+                    <i class="fa-solid fa-newspaper"></i> Auditoria
+                </button>
+            
+                <button onclick="showTab(5)" class="tab-btn active">
+                    <i class="fa-solid fa-video"></i> Configurar Câmeras
+                </button>
+            </nav>
+        </div>
+    </aside>
+{% endblock nav_aside %}
+
+{% block section %}
+    <section class="content-area">
+
+        <div class="information">
+            <h2 style="color: var(--text-main); margin-bottom: 25px;">Bem-vindo, {{current_user.username | capitalize }}</h2>
+            <p class="data-agr"> 
+                <i class="fa-solid fa-clock"></i> <span id="relogio"></span> 
+                <br>
+                <i class="fa-solid fa-location-dot"></i> <span id="local-texto">Buscando localização...</span>
+            </p>
+        </div>
+
+        <div class="tabs-content">
+            <section class="tab-panel">
+                <h2>Usuários</h2>
+                {% for user in lista_usuarios %}
+                    <p> {{user}} </p>
+                {% endfor %}
+            </section>
+
+            <section class="tab-panel">
+                <h2>Licensa</h2>
+            </section>
+
+            <section class="tab-panel">
+                <h2>Log do Sistema</h2>
+            </section>
+
+            <section class="tab-panel">
+                <h2>Registros de Detecção</h2>
+            </section>
+
+            <section class="tab-panel">
+                <h2>Auditoria</h2>
+            </section>
+
+            <section class="tab-panel active">
+                <h2>Configuração de Câmeras</h2>
+            </section>
+        </div>
+        
+    </section>
+{% endblock %}
