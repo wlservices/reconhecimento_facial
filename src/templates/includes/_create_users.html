@@ -1,0 +1,32 @@
+<div id="meu-modal" class="modal-aberto"> 
+    <div class="modal-conteudo">
+        <div class="title-box">
+            <i class="fas fa-user"></i>
+            <h3>CADASTRAR USUÁRIO</h3>
+        </div>
+        <form class="form-create-user" method="POST">
+            <input type="hidden" name="form_action" value="create_user">
+            
+            <label for="username" class="form-group">Usuário:</label>
+            <input type="text" name="username" class="form-control" required><br><br>
+
+            <label for="password" class="form-group">Senha:</label>
+            <input type="password" name="password" class="form-control" required><br><br>
+
+            <label for="role" class="form-group">Cargo:</label>
+            <select name="role" class="form-control">
+                {% if current_user.role == 'Administrador' %}
+                    <option value="Administrador">Administrador</option>
+                {% endif %}
+                <option value="Supervisor">Supervisor</option>
+                <option value="Funcionario">Funcionário</option>
+            </select>
+            <br><br>
+
+            <div class="acoes-footer">
+                <button class="btn-save" type="submit">Cadastrar</button>
+                <button class="btn-exit" type="button" onclick="document.getElementById('modal-container').innerHTML=''"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </form>
+    </div>
+</div>

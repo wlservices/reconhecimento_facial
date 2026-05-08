@@ -13,6 +13,17 @@ function showTab(index) {
         });
 };
 
+function toggleDetails(id) {
+    const elemento = document.getElementById(id);
+    elemento.classList.toggle('expandido');
+}
+
+function confirmarExclusao(id) {
+    if (confirm("Tem certeza que deseja excluir este usuário?")) {
+        window.location.href = "/excluir-usuario/" + id;
+    }
+}
+
 function atualizarRelogio() {
     const agora = new Date();
     const formato = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR');

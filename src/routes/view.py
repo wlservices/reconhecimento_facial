@@ -3,6 +3,8 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash,
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
 from src.extensions import db
+from src.controller.controller import redirect_currect_dashboard
+from src.decorator import role_required
 import os
 import base64
 
@@ -87,9 +89,22 @@ def first_access():
 @login_required
 def update_profile():
     if request.method == "POST":
+        user_id = request.form.get('user_id')
+        cropped_data = request.form.get('cropped_image') # String Base64 do Cropper
+        new_password = request.form.get('password')
         name = request.form.get('name')
         role = request.form.get('role')
-        cropped_data = request.form.get('cropped_image') # String Base64 do Cropper
+
+        if user_id:
+            user_to_update = User.query.get(user_id)
+        else:
+            user_to_update = current_user
+
+        user_to_update.username = name
+        user_to_update.role = role
+
+        if new_password and new_password.strip() != "":
+            user_to_update.set_password(new_password)
 
         # 1. Prioridade para a imagem recortada (Cropper)
         if cropped_data and "," in cropped_data:
@@ -98,7 +113,7 @@ def update_profile():
 
             # Use () se getId for um método, ou tire se for atributo. 
             # Geralmente no Flask-Login é current_user.id
-            filename = f"user_{current_user.id}.jpg"
+            filename = f"user_{user_to_update.id}.jpg"
             
             # Pasta de destino
             upload_dir = os.path.join(current_app.static_folder, "uploads")
@@ -109,7 +124,7 @@ def update_profile():
             with open(file_path, "wb") as f:
                 f.write(data) # Corrigido: era f.write, não f.f.write
 
-            current_user.photo = f"uploads/{filename}"
+            user_to_update.photo = f"uploads/{filename}"
 
         # 2. Se não veio recorte, mas veio arquivo direto (fallback)
         elif 'photo' in request.files:
@@ -117,15 +132,35 @@ def update_profile():
             if file and file.filename != '':
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(current_app.static_folder, "uploads", filename))
-                current_user.photo = f"uploads/{filename}"
-
-        # 3. Atualiza os textos
-        current_user.username = name
-        current_user.role = role
+                user_to_update.photo = f"uploads/{filename}"
 
         db.session.commit()
 
         flash("Perfil atualizado com sucesso!", "success")
-        return redirect(url_for("view.homepage"))
+        return redirect_currect_dashboard(current_user)
     
-    return render_template("profile_settings.html")
+    if request.method == "GET":
+        return render_template("profile_settings.html")
+
+
+@views_bp.route("/excluir-usuario/<int:id>", methods=["GET", "POST"])
+@login_required
+@role_required(['Administrador', 'Supervisor'])
+def excluir_usuario(id):
+    # Busca o usuário pelo ID
+    usuario = User.query.get_or_404(id)
+
+    if usuario.id == current_user.id:
+        flash("Você não pode excluir sua própria conta por aqui!", "error")
+        return redirect_currect_dashboard(current_user)
+
+    try:
+        db.session.delete(usuario)
+        db.session.commit()
+        flash(f"Usuário {usuario.username} excluído com sucesso.", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash("Erro ao excluir usuário.", "error")
+        print(f"Erro: {e}")
+
+    return redirect_currect_dashboard(current_user)

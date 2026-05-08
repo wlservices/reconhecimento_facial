@@ -1,0 +1,27 @@
+.btn-exit{
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+
+    border: none;
+    border-radius: 8px;
+    
+    padding: 10px;
+    margin: 5px;
+    
+    cursor: pointer;
+    
+    width: 40px;
+    
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-exit:hover {
+    background: var(--btn-color);
+    transform: translateY(-2px);
+}

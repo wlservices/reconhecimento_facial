@@ -20,7 +20,7 @@
 
     /* Colors Light Mode */
     --text-main: #1e1e2d;
-    --bg-body: #f4f7fe;
+    --bg-body: #d5d6da;
     --side-bg: #1e1e2d;
    
     /* Common Colors */
@@ -28,6 +28,9 @@
     --primary-color: #274DF5;
     --text-light: #a3aed0;
     --btn-color: #ff4d4d;
+
+    --green-color: #28a745;
+    --green-color-hover: #28a74598;
 
     /* Colors Dark Mode */
     --text-main-dark: #27F2F5;
@@ -217,8 +220,9 @@ header {
 .content-area {
     width: 100%;
     height: 100%;
-    padding: 30px;
+    padding: 20px 30px;
     margin: 0 auto;
+    overflow-y: auto;
 }
 
 .cards-grid {
@@ -324,7 +328,8 @@ input[type="file"] {
 }
 
 /* Botão Salvar */
-.btn-save {
+.btn-save,
+.btn-delete {
     background: var(--primary-color);
     color: var(--white);
     border: none;
@@ -339,12 +344,32 @@ input[type="file"] {
 }
 
 .btn-save:hover {
-    background: #3651d4;
+    background: var(--green-color-hover);
+    transform: translateY(-2px);
+}
+.btn-delete:hover {
+    background: var(--btn-color);
     transform: translateY(-2px);
 }
 
-.btn-save:active {
+.btn-save:active,
+.btn-delete:active {
     transform: translateY(0);
+}
+
+.btn-add { 
+    background: var(--green-color); 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    border-radius: 4px; 
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-add:hover {
+    background-color: var(--green-color-hover);
+     transform: translateY(-2px);
 }
 
 /* Alertas de Mensagem Flash */
@@ -485,15 +510,13 @@ select.form-control:focus {
 }
 
 .tabs-content {
-    position: relative;
     overflow: hidden;
-    height: 100%;
-    width: 100%;
+    margin: 0 5px;
+    padding: 5px;
 }
 
 .tab-panel {
-    position: absolute;
-    top: 0;
+    display: none;
     width: 100%;
     opacity: 0;
     transform: translateY(20px);
@@ -502,16 +525,119 @@ select.form-control:focus {
 }
 
 .tab-panel.active {
+    display: block;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
+.header-acoes,
 .information{
     display: flex;
+    margin:  10px 5px;
+    padding: 20px;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-color);
-    padding: 20px;
-    border-radius: 15px;
+}
+
+.information h2{
+    margin: 0 !important;
+}
+
+.inputs{
+    margin: 10px auto 40px;
+    display: flex;
+    max-width: 100%;
+    justify-content: center;
+}
+
+.grid-form,
+.permissoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+    padding: 0 10px;
+    gap: 10px;
+}
+
+.acoes-footer{
+    display: flex;
+    flex-grow: 1;
+    gap: 50px;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.usuario-card { 
+    margin: 5px;
+    overflow: hidden;
+}
+
+.usuario-header { 
+    padding: 15px 20px; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: transparent; 
+}
+
+.usuario-header:hover { 
+    background: rgba(100, 100, 100, 0.20); 
+}
+
+.info-basica strong { 
+    display: block; 
+    font-size: 1.1em; 
+}
+
+.info-basica span { 
+    color: #666; 
+    font-size: 0.9em; 
+}
+
+/* Lógica de Expansão */
+.usuario-detalhes { 
+    max-height: 0; 
+    padding: 0 20px; 
+    transition: max-height 0.3s ease-out; 
+    background: var(--white); 
+    border-top: 0px solid #eee;
+}
+
+.usuario-detalhes.expandido { 
+    max-height: 500px; 
+    padding: 20px; 
+    border-top: 1px solid #eee; 
+}
+
+.modal-aberto {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}   
+
+.modal-conteudo{
+    position: relative;
+}
+
+.title-box{
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-create-user{
+    text-align: start;
 }

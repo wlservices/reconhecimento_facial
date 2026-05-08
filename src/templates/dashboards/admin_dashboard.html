@@ -13,7 +13,7 @@
                 </button>
             
                 <button onclick="showTab(1)" class="tab-btn">
-                    <i class="fa-solid fa-key"></i> Licencas
+                    <i class="fa-solid fa-key"></i> Licença
                 </button>
             
                 <button onclick="showTab(2)" class="tab-btn">
@@ -31,6 +31,10 @@
                 <button onclick="showTab(5)" class="tab-btn active">
                     <i class="fa-solid fa-video"></i> Configurar Câmeras
                 </button>
+
+                <button onclick="showTab(6)" class="tab-btn">
+                    <i class="fa-solid fa-user"></i> Perfil
+                </button>
             </nav>
         </div>
     </aside>
@@ -39,8 +43,10 @@
 {% block section %}
     <section class="content-area">
 
-        <div class="information">
-            <h2 style="color: var(--text-main); margin-bottom: 25px;">Bem-vindo, {{current_user.username | capitalize }}</h2>
+        <div class="information blur">
+            <div class="saudacoes">
+                <h2 style="color: var(--text-main); margin-bottom: 25px;">Bem-vindo, {{current_user.username | capitalize }}</h2>
+            </div>
             <p class="data-agr"> 
                 <i class="fa-solid fa-clock"></i> <span id="relogio"></span> 
                 <br>
@@ -48,33 +54,59 @@
             </p>
         </div>
 
-        <div class="tabs-content">
-            <section class="tab-panel">
-                <h2>Usuários</h2>
-                {% for user in lista_usuarios %}
-                    <p> {{user}} </p>
-                {% endfor %}
-            </section>
+        <div class="tabs-content blur">
 
-            <section class="tab-panel">
-                <h2>Licensa</h2>
-            </section>
+            <!-- INICIO Seção de Usuários -->
+            {% include 'includes/_list_users.html' %}
+            <!-- FIM Seção de Usuários-->
 
+            <!-- INICIO Seção de Licença -->
             <section class="tab-panel">
-                <h2>Log do Sistema</h2>
+                <div class="header-acoes">
+                    <h2>Licença</h2>
+                </div>
             </section>
+            <!-- FIM Seção de Licença -->
 
+            <!-- INICIO Seção de Logs de Sistema -->
             <section class="tab-panel">
-                <h2>Registros de Detecção</h2>
+                <div class="header-acoes">
+                    <h2>Logs de Sistema</h2>
+                </div>
             </section>
+            <!-- FIM Seção de Logs de Sistema -->
 
+            <!-- INICIO Seção de Registros de Detecção -->
             <section class="tab-panel">
-                <h2>Auditoria</h2>
+                <div class="header-acoes">
+                    <h2>Registros de Detecção</h2>
+                </div>
             </section>
+            <!-- FIM Seção de Registro de Detecção -->
 
+            <!-- INICIO Seção de Auditoria -->
+            <section class="tab-panel">
+                <div class="header-acoes">
+                    <h2>Auditoria</h2>
+                </div>
+            </section>
+            <!-- FIM Seção de Auditoria -->
+
+            <!-- INICIO Seção de Câmeras -->
             <section class="tab-panel active">
-                <h2>Configuração de Câmeras</h2>
+                <div class="header-acoes">
+                    <h2>Configuração de Câmeras</h2>
+                </div>
             </section>
+            <!-- FIM Seção de Câmeras -->
+
+            <!-- INICIO Seção de Perfil -->
+            <section class="tab-panel">
+                <div class="header-acoes">
+                    <h2>Perfil</h2>
+                </div>
+            </section>
+            <!-- FIM Seção de Perfil -->
         </div>
         
     </section>

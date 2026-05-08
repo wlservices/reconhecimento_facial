@@ -7,39 +7,93 @@
 {% block nav_aside %}
     <aside>
         <div class="nav-box">
-            <ul class="nav-links">
-                <li><a href="#"><i class="fa-regular fa-user"></i> Usuarios</a></li>
-                <li><a href="#"><i class="fa-solid fa-key"></i> Licencas</a></li>
-                <li><a href="#"><i class="fa-solid fa-laptop-file"></i> Logs do Sistema</a></li>
-                <li><a href="#"><i class="fa-solid fa-file-shield"></i> Registros de Deteccao</a></li>
-                <li><a href="#"><i class="fa-solid fa-newspaper"></i> Auditoria</a></li>
-                <li><a href="#"><i class="fa-solid fa-video"></i> Configurar Cameras</a></li>
-            </ul>
+            <nav class="nav-links">
+                <button onclick="showTab(0)" class="tab-btn">
+                    <i class="fa-regular fa-user"></i> Usuários
+                </button>
+            
+                <button onclick="showTab(1)" class="tab-btn">
+                    <i class="fa-solid fa-key"></i> Licença
+                </button>
+            
+                <button onclick="showTab(2)" class="tab-btn">
+                    <i class="fa-solid fa-file-shield"></i> Registros de Detecção
+                </button>
+            
+                <button onclick="showTab(3)" class="tab-btn">
+                    <i class="fa-solid fa-newspaper"></i> Auditoria
+                </button>
+
+                <button onclick="showTab(4)" class="tab-btn">
+                    <i class="fa-solid fa-newspaper"></i> Multiview
+                </button>
+
+                <button onclick="showTab(5)" class="tab-btn">
+                    <i class="fa-solid fa-user"></i> Perfil
+                </button>
+            </nav>
         </div>
     </aside>
 {% endblock nav_aside %}
 
 {% block section %}
     <section class="content-area">
-        <h2 style="color: var(--text-main); margin-bottom: 25px;">Bem-vindo, {{current_user.username | capitalize }} - {{current_user.role | capitalize }}</h2>
-        
-        <div class="cards-grid">
-            <div class="card">
-                <h3>Vendas Hoje</h3>
-                <div class="value">R$ 1.250,00</div>
+        <div class="information blur">
+            <div class="saudacoes">
+                <h2 style="color: var(--text-main); margin-bottom: 25px;">Bem-vindo, {{current_user.username | capitalize }}</h2>
             </div>
-            <div class="card">
-                <h3>Novos Clientes</h3>
-                <div class="value">12</div>
-            </div>
-            <div class="card">
-                <h3>Projetos Ativos</h3>
-                <div class="value">5</div>
-            </div>
-            <div class="card">
-                <h3>Mensagens</h3>
-                <div class="value">24</div>
-            </div>
+            <p class="data-agr"> 
+                <i class="fa-solid fa-clock"></i> <span id="relogio"></span> 
+                <br>
+                <i class="fa-solid fa-location-dot"></i> <span id="local-texto">Buscando localização...</span>
+            </p>
+        </div>
+
+        <div class="tabs-content blur">
+
+            <!-- INICIO Seção de Usuários -->
+            {% include 'includes/_list_users.html' %}
+            <!-- FIM Seção de Usuários-->
+
+            <!-- INICIO Seção de Licença -->
+            <section class="tab-panel">
+                <div class="header-acoes">
+                    <h2>Licença</h2>
+                </div>
+            </section>
+            <!-- FIM Seção de Licença -->
+
+            <!-- INICIO Seção de Registros de Detecção -->
+            <section class="tab-panel">
+                <div class="header-acoes">
+                    <h2>Registros de Detecção</h2>
+                </div>
+            </section>
+            <!-- FIM Seção de Registro de Detecção -->
+
+            <!-- INICIO Seção de Auditoria -->
+            <section class="tab-panel">
+                <div class="header-acoes">
+                    <h2>Auditoria</h2>
+                </div>
+            </section>
+            <!-- FIM Seção de Auditoria -->
+
+            <!-- INICIO Seção de Câmeras -->
+            <section class="tab-panel active">
+                <div class="header-acoes">
+                    <h2>Multiview</h2>
+                </div>
+            </section>
+            <!-- FIM Seção de Câmeras -->
+
+            <!-- INICIO Seção de Perfil -->
+            <section class="tab-panel">
+                <div class="header-acoes">
+                    <h2>Perfil</h2>
+                </div>
+            </section>
+            <!-- FIM Seção de Perfil -->
         </div>
     </section>
 {% endblock %}

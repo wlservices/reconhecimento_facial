@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cropper.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/btns.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blur.css')}}">
+
 </head>
 <body>
+    <div id="modal-container"></div>
 
     {% include 'includes/_modal.html' %}
 
@@ -25,6 +29,7 @@
     
     <script src="{{ url_for('static', filename='js/cropper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
 </body>
 </html>

@@ -1,0 +1,59 @@
+
+
+<section class="tab-panel">
+    <div class="header-acoes">
+        <h2>Gerenciar Usuários</h2>
+        <a class="btn-add" hx-get="{{ url_for('admin.get_modal') }}" hx-target="#modal-container"><i class="fa-solid fa-plus"></i></a>
+    </div>
+    <div class="lista-usuarios">
+        {% for usuario in usuarios %}
+        <div class="usuario-card blur">
+            <!-- Cabeçalho do Card (Visível) -->
+            <div class="usuario-header" onclick="toggleDetails('detalhes-{{ usuario.id }}')">
+                <div class="info-basica">
+                    <strong>{{ usuario.username }}</strong>
+                    <span>{{ usuario.role }}</span>
+                </div>
+                <i class="fa-solid fa-caret-down seta-icon"></i>
+            </div>
+
+            <!-- Detalhes Expansíveis (Escondidos por padrão) -->
+            <div id="detalhes-{{ usuario.id }}" class="usuario-detalhes">
+                <form id="profile-form" action="{{ url_for('view.update_profile') }}" method="POST">
+                    <input type="hidden" name="user_id" value="{{ usuario.id }}">
+                    <div class="inputs">
+                        <div class="grid-form">
+                            <div class="campo">
+                                <label class="form-group">Username:</label>
+                                <input type="text" name="name" class="form-control" value="{{ usuario.username }}">
+                            </div>
+                            <div class="campo">
+                                <label class="form-group">Cargo:</label>
+                                <input type="text" name="role" class="form-control" value="{{ usuario.role }}">
+                            </div>
+                            <div class="campo">
+                                <label class="form-group">Nova Senha:</label>
+                                <input type="password" name="password" class="form-control" placeholder="Deixe em branco para manter">
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="permissoes">
+                            <p><strong>Permissões Granuladas:</strong></p>
+                            <label><input type="checkbox" name="p_admin" {% if usuario.role == 'Administrador' %}checked{% endif %}> Administrador</label>
+                            <label><input type="checkbox" name="p_edit" {% if usuario.role == 'Supervisor' %}checked{% endif %}> Editar Conteúdo</label>
+                            <label><input type="checkbox" name="p_view" {% if usuario.role == 'Funcionario'%}checked{% endif %}> Apenas Leitura</label>
+                        </div>
+                    </div>
+
+                    <div class="acoes-footer">
+                        <button type="button" class="btn-delete" onclick="confirmarExclusao( {{ usuario.id }} )">Excluir Usuário</button>
+                        <button type="submit" class="btn-save">Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
