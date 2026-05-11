@@ -12,7 +12,7 @@ import os
 
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_ADDRESS = os.getenv("DB_ADDRESS")
+DB_HOST = os.getenv("DB_HOST")
 DB_NAME = os.getenv("DB_NAME")
 
 
@@ -27,7 +27,7 @@ app = Flask(
 # Configuração do banco (SQLite por padrão)
 """
 Quando quiser migrar para PostgresQL so usar esse trecho no lugar do outro!:
-app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_ADDRESS}/{DB_NAME}"
+app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
 """
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(BASE_DIR, 'src', 'data', 'database.db')}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
